@@ -1,0 +1,2 @@
+1 | sasa | baba | 2093
+3 | susu | bubu | 5678

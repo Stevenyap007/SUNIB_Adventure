@@ -1,0 +1,1 @@
+strcat(y, z);/*adding (concatinating) z in y*/
