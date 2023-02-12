@@ -1,0 +1,201 @@
+Bit Byte <=> Decimal
+Bit = 0 1
+Byte 8 Bit
+Byte <=> Octet
+
+Bit
+1 2^7 = 128
+2 2^6 = 64
+3 2^5 = 32
+4 2^4 = 16
+5 2^3 = 8
+6 2^2 = 4
+7 2^1 = 2
+8 2^0 = 1
+
+IP Address 10.22.101.131
+A        B        C        D
+12345678
+10011000.10000000.00001000.11111111
+
+152 . 128 . 8 . 255
+
+0.0.0.0 - 255.255.255.255 = 4,294,967,296 IPv4 Address
+0.0.0.0
+0.0.0.1
+0.0.0.2
+0.0.0.255
+0.0.1.0
+
+IP Address 10.22.101.131
+00001010.00010110.01100101.10000011
+
+IPv4 Address Unique untuk setiap Host
+
+Classful IP Address
+A 0.0.0.0   - 127.255.255.255
+B 128.0.0.0 - 191.255.255.255
+C 192.0.0.0 - 223.255.255.255
+D 224.0.0.0 - 239.255.255.255
+E 240.0.0.0 - 255.255.255.255
+
+Public & Private IP Address + NAT (Network Address Translation)
+Public -> Koneksi ke luar (Internet)
+Private -> Koneksi lokal (Intranet)
+Private IP Address
+A 10.0.0.0    - 10.255.255.255   \
+B 172.16.0.0  - 172.31.255.255	 |--- 202.58.173.66
+C 192.168.0.0 - 192.168.255.255  /
+
+My Private IP 10.22.101.131
+My Public IP 202.58.173.66
+NAT (Network Address Translation)
+IP 1          <=> IP 2
+Private IP    <=> Public IP
+10.22.101.131 <=> 202.58.173.66
+10.22.101.130 <=> 202.58.173.66
+
+IPv6 Address
+
+IP Address = Logical Address
+MAC Address = Hardware Address / Physical Address / Burnt In Address
+
+BINUS            Private Rumah
+192.168.0.1      192.168.0.1
+10.22.101.131    10.22.101.131
+
+Subnetting
+Private IP Address                Subnet Mask    Slash Notation
+A 10.0.0.0    - 10.255.255.255    255.0.0.0      /8
+B 172.16.0.0  - 172.31.255.255	  255.255.0.0    /16
+C 192.168.0.0 - 192.168.255.255   255.255.255.0  /24 
+
+IP Address 10.22.101.131
+10.0.0.0 - 10.255.255.255
+00001010.11111111.11111111.11111111
+11111111.00000000.00000000.00000000
+Network  Host
+Network ID = Bit 1 pada subnet mask
+Host ID = Bit 0 pada subnet mask
+Subnet Mask 255.0.0.0 /8
+10.0.0.0 - 10.255.255.255
+Network Address (IP Pertama, Genap)     = 10.0.0.0
+Usable IP Address                       = 10.0.0.1 - 10.255.255.254
+Broadcast Address (IP Terakhir, Ganjil) = 10.255.255.255
+
+Network     192.168.0.0/24
+Subnet Mask 255.255.255.0
+Range = 192.168.0.0 - 192.168.0.255
+NA = 192.168.0.0
+Usable Host = 192.168.0.1 - 192.168.0.254
+BA = 192.168.0.255
+
+Network     192.168.100.0/24
+Range = 192.168.100.0 - 192.168.100.255
+NA = 192.168.100.0
+Usable Host = 192.168.100.1 - 192.168.100.254
+BA = 192.168.100.255
+
+/8 Host banyak
+/24 Host makin dikit
+Network     192.168.100.0/24
+/25
+11000000.10101000.01100100.01111111
+11111111.11111111.11111111.10000000
+Subnet Mask = 255.255.255.128
+2^(Host Bits)
+2^(32-25)
+2^7 = 128 IP Address
+Usable Host = 2^7 - 2 = 126 Usable Host
+Subnet 1 Range = 192.168.100.0 - 192.168.100.127
+NA = 192.168.100.0
+Usable Host = 192.168.100.1 - 192.168.100.126
+BA = 192.168.100.127
+
+Subnet 2 Range = 192.168.100.128 - 192.168.100.255
+NA = 192.168.100.128
+Usable Host = 192.168.100.129 - 192.168.100.254
+BA = 192.168.100.255
+
+Network     192.168.100.0/24
+/26
+Subnet Mask = 255.255.255.192
+                         .11000000
+Total IP = 2^(32-26)
+         = 64 IP Address
+      1               2 
+NA =  192.168.100.0   192.168.100.64
+      3               4
+      192.168.100.128 192.168.100.192
+      1               2 
+BA =  192.168.100.63  192.168.100.127
+      3               4
+      192.168.100.191 192.168.100.255
+Usable Host = Diantara NA BA
+
+Network     192.168.100.0/24
+/27
+Subnet Mask = 255.255.255.224
+2^(32-27) = 32 IP Address
+
+NA = .0, .32, .64, .96, .128, .160, .192, .224
+BA = .31,.63, .95, .127,.159, .191, .223, .255
+
+Network     192.168.100.0/24
+/28
+Subnet Mask = 255.255.255.240
+2^4 = 16 IP Address
+NA = .0, .16, .32, .48, .64, .160, .176, .192
+BA = .15,.31, .47, .63, .79, .175, .191, .207
+
+Network     192.168.100.0/24
+/29
+Subnet Mask = 255.255.255.248
+2^3 = 8 IP Address
+NA = .0 .8  .16 .24 .32 .80 .160 .240 .248
+BA = .7 .15 .23 .31 .39 .87 .167 .247 .255
+
+255.255.255.0   /24
+255.255.255.128 /25
+255.255.255.192 /26
+255.255.255.224 /27
+255.255.255.240 /28
+255.255.255.248 /29
+255.255.255.252 /30
+255.255.255.254 /31
+255.255.255.255 /32
+
+/17
+Subnet Mask = 255.255.128.0
+
+Subnetting = Proses pembagian network menjadi subnet
+1. FLSM Fixed Length Subnet Mask (SM sama semua)
+2. VLSM Variable Length Subnet Mask (SM menyesuaikan)
+ 
+Network     192.168.100.0/24
+Total Host = 2^(32-24) 256
+
+256
+1.   2.   3.
+128  64   32
+/25  /26  /27
+NA = 1. 192.168.100.0
+     2. 192.168.100.128
+     3. 192.168.100.192
+
+BA = 1. 192.168.100.127
+     2. 192.168.100.191
+     3. 192.168.100.223
+
+192.168.100.224 - 192.168.100.255 Unallocated
+
+Network     192.168.100.0/24
+Divisi
+A 100 PC
+B 50 PC
+C 75 PC
+
+
+
+
+

@@ -1,0 +1,58 @@
+-- 1. Import ‘stawbucks.sql’ & Use Database ‘stawbucks’!
+-- link https://regexone.com/
+USE stawbucks;
+
+-- 2. Create a table called ‘barista_grades’ with the following criteria
+CREATE TABLE barista_grades(
+    barista_grade_id CHAR(5) PRIMARY KEY,
+    barista_grade_name VARCHAR(30) NOT NULL,
+    CONSTRAINT Ck__barista_grade_id CHECK(barista_grade_id REGEXP '^BG[0-9][0-9][0-9]$')
+)
+
+-- 3. Insert the following values into the newly created barista_grades table.
+INSERT INTO barista_grades (barista_grade_id, barista_grade_name) VALUES
+('BG001', 'Junior Barista'),
+('BG002', 'Senior Barista'),
+('BG003', 'Coffee Master'),
+('BG004', 'Shop Manager')
+
+-- 4. Add a new column on baristas with the following criteria
+ALTER TABLE baristas 
+	ADD barista_grade_id CHAR(5) NULL REFERENCES barista_grades(barista_grade_id)
+-- ALTER TABLE baristas
+--	ADD barista_grade_id CHAR(5) NULL;
+-- ALTER TABLE baristas
+--	ADD FOREIGN KEY (barista_grade_id) REFERENCES barista_grades(barista_grade_id)
+
+-- 5 Add a constraint on customers table that validates is_member column must be either ‘Yes’ or ‘No’!
+ALTER TABLE customers
+	ADD CONSTRAINT CK_is_member CHECK(is_member IN('Yes','No'))
+
+-- 6 Update barista_grade_id from baristas to ‘BG001’ for every barista whose barista_salary is less than 5000000, then commit the change!
+START TRANSACTION;
+UPDATE baristas b
+SET b.barista_grade_id  = 'BG001'
+WHERE b.barista_salary < 5000000;
+COMMIT;
+
+-- 7 Delete barista whose barista_address ends with ‘ Street’!
+DELETE FROM baristas 
+WHERE barista_address REGEXP ' Street$'
+
+-- 8 Display transaction_id, coffee_name, customer_name, Price (obtained from quantity * coffee_price * 1000/coffee_size_quantity rounded to 3 place decimal and ‘Rp. ’ added to the start of the price), Transaction Date (obtained from transaction_date like the following format ‘Dec 25, 2022’) for every coffee whose coffee_strength is above 7.
+SELECT th.transaction_id,
+c.coffee_name,
+cu.customer_name,
+CONCAT('RP. ',ROUND((td.quantity * c.coffee_price * 1000 / cs.coffee_size_quantity), 3)) AS Price,
+DATE_FORMAT(th.transaction_date, '%b %e, %Y') AS `Transaction Date`
+FROM transaction_headers th JOIN transaction_details td ON th.transaction_id = td.transaction_id
+	JOIN coffees c ON td.coffee_id = c.coffee_id 
+    JOIN customers cu ON th.customer_id = cu.customer_id
+    JOIN coffee_sizes cs ON td.coffee_size_id = cs.coffee_size_id
+    JOIN coffee_types ct ON c.coffee_type_id = ct.coffee_type_id
+WHERE ct.coffee_strength > 7
+
+
+
+
+

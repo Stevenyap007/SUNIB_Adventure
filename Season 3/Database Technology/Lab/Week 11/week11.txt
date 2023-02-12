@@ -1,0 +1,46 @@
+https://anthonychandra.notion.site/Simple-Query-II-f5d6fd56e505486f9f4fe960a1c563c6
+
+--1 (Join)
+SELECT *
+FROM transaction_details td LEFT JOIN coffees c ON td.coffee_id = c.coffee_id;
+
+SELECT *
+FROM transaction_details td RIGHT JOIN coffees c ON td.coffee_id = c.coffee_id;
+
+SELECT *
+FROM transaction_details td CROSS JOIN coffees c;
+
+--2 (Order By)
+SELECT *
+FROM transaction_details td LEFT JOIN coffees c ON td.coffee_id = c.coffee_id
+ORDER BY c.coffee_id DESC;
+
+SELECT *
+FROM transaction_details td LEFT JOIN coffees c ON td.coffee_id = c.coffee_id
+ORDER BY c.coffee_id DESC, td.transaction_id ASC;
+
+--3 (Set operation: UNION,UNION ALL, INTERSECT , EXCEPT)
+SELECT c.customer_id,
+c.customer_name,
+c.customer_gender,
+c.customer_address
+FROM customers c
+UNION
+SELECT b.barista_id,
+b.barista_name,
+b.barista_gender,
+b.barista_address
+FROM baristas b;
+
+SELECT c.customer_id,
+c.customer_name,
+c.customer_gender,
+c.customer_address
+FROM customers c
+UNION ALL
+SELECT c.customer_id,
+c.customer_name,
+c.customer_gender,
+c.customer_address
+FROM customers c;
+

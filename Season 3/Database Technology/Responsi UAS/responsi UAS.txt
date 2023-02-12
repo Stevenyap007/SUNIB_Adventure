@@ -1,0 +1,3 @@
+SELECT mhs.NIM, mhs.nama, mk.kode_mk, mk.sks
+FROM mhs, mk
+WHERE mhs.kode_mk = mk.kode_mk

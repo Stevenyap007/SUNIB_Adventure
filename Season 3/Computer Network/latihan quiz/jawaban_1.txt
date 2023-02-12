@@ -1,0 +1,53 @@
+1.
+
+7 osi layer
+Application
+Presentattion
+Session
+Transport
+Network
+data link
+Physical
+
+straight cable
+ujung 1
+pin 1 putih-oren
+pin 2 oren
+pin 3 putih-hijau
+pin 4 biru
+pin 5 biru-putih
+pin 6 hijau
+pin 7 putih-cokelat
+pin 8 cokelat
+
+ujung 2
+pin 1 putih-oren
+pin 2 oren
+pin 3 putih-hijau
+pin 4 biru
+pin 5 biru-putih
+pin 6 hijau
+pin 7 putih-cokelat
+pin 8 cokelat
+
+cross-over
+ujung 1
+pin 1 putih-oren
+pin 2 oren
+pin 3 putih-hijau
+pin 4 biru
+pin 5 biru-putih
+pin 6 hijau
+pin 7 putih-cokelat
+pin 8 cokelat
+
+ujung cross 2
+ujung 1
+pin 1 putih-hijau
+pin 2 hijau
+pin 3 putih-oren
+pin 4 biru
+pin 5 biru-putih
+pin 6 oren
+pin 7 putih-cokelat
+pin 8 cokelat

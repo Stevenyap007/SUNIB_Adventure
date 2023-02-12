@@ -1,0 +1,39 @@
+SELECT fish_name,
+fish_price/2
+FROM fishes
+
+SELECT fish_name,
+CONCAT('Price : $', ROUND(fish_price/2, 2), ' just for today.') AS Announcement
+FROM fishes
+WHERE fish_name LIKE '%tuna%';
+
+SELECT fish_name,
+CONCAT('Price : $', ROUND(fish_price/2, 2), ' just for today.') AS Announcement
+FROM fishes
+WHERE fish_name REGEXP '\w*tuna\w*';
+
+SELECT th.transaction_id,
+DAY(th.transaction_date) AS 'Day',
+UPPER(c.customer_name) AS 'Name'
+from transaction_headers th JOIN customers c 
+	ON th.customer_id = c.customer_id
+WHERE DATEDIFF('2020-06-23',th.transaction_date) BETWEEN 0 AND 10;
+
+SELECT ct.customer_name,
+LOWER(ct.customer_address) AS 'Address'
+FROM customers ct
+WHERE ct.customer_address REGEXP '^[0=9][0-9] ';
+
+SELECT c.customer_name,
+th.transaction_date,
+LEFT(DAYNAME(th.transaction_date),3) AS 'DayOfWeek'
+FROM transaction_headers th JOIN customers c
+	ON th.customer_id = c.customer_id
+WHERE MONTH(th.transaction_date) = 6 AND 
+YEAR(th.transaction_date) = 2020
+
+SELECT th.transaction_id,th.transaction_date, 
+SUBSTRING(f.fisherman_name, LOCATE(' ',f.fisherman_name)+1) AS 'LastName'
+from transaction_headers th JOIN fishermen f 
+	ON th.fisherman_id = f.fisherman_id
+WHERE QUARTER(th.transaction_date) = 3

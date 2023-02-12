@@ -1,0 +1,37 @@
+CREATE TABLE users(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    NAME VARCHAR(255) NOT NULL,
+    email VARCHAR(255) CHECK
+        (email LIKE '%@gmail.com'),
+        `password` VARCHAR(20) NOT NULL
+)
+
+
+CREATE TABLE roles(
+	id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+
+ALTER TABLE users 
+        ADD role_id INT NOT NULL
+
+
+ALTER TABLE users
+	ADD CONSTRAINT FK_usersRoles
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+
+
+INSERT INTO roles (id, name) VALUES
+(1, 'Admin'),(2,'Manager')
+
+
+INSERT INTO users (id,name,email,`password,role_id) VALUES
+(1,'Joshua','Joshua@admin.com','123456, 1)
+
+
+INSERT INTO users (id,name,email,`password`,role_id) VALUES
+(1,'Joshua','Joshua@gmail.com','123456', 1)
+
+
+DROP DATABASE aw_resto

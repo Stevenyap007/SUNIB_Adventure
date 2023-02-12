@@ -1,0 +1,68 @@
+--1.Create Table
+CREATE TABLE vendors (
+    vendor_id CHAR(5) PRIMARY KEY CHECK(vendor_id REGEXP 'VE[0-9][0-9][0-9]'),
+    vendor_name VARCHAR(50) NOT NULL,
+    vendor_phone VARCHAR(50) NOT NULL CHECK(LENGTH(vendor_phone) BETWEEN 12 AND 15),
+    vendor_email VARCHAR(50) NOT NULL CHECK(vendor_email LIKE '%@email.com'),
+    product_id CHAR(5) NOT NULL,
+    FOREIGN KEY (product_id)
+    	REFERENCES products(product_id)                                         
+        ON UPDATE CASCADE ON DELETE CASCADE
+                                          
+                                          
+)
+
+
+--2.Alter Table
+ALTER TABLE vendors
+ADD vendor_address VARCHAR (50) NOT NULL CHECK(vendor_address LIKE 'JL. %')
+
+--3.INSERT
+INSERT INTO vendors VALUES
+('VE001', 'PT ABC', '08123456789812', 'adi@email.com', 'PR001', 'Jl. Xx')
+
+--4.SELECT
+SELECT 
+	LOWER(p.product_name) AS `Name of Product`,
+    p.product_price AS `Product Price`,
+    CONCAT('Discount ',FLOOR(RAND()*30) + 1, '%') AS `Product Discount`
+
+FROM products p 
+
+SELECT
+	c.customer_id,
+    LEFT(c.customer_name, LOCATE(' ',c.customer_name) - 1) AS `First Name`,
+    RIGHT(c.customer_name, LOCATE(' ', REVERSE(c.customer_name)) - 1 ) AS `Last Name`,
+    LEFT(c.customer_gender, 1) AS `Customer Gender`
+FROM customers c
+WHERE YEAR(c.customer_dob) < 2002
+
+SELECT 
+	th.customer_id,
+    DATE_FORMAT(th.transaction_date, '%M, %d %Y') AS `Date of Transaction`
+
+FROM transaction_header th
+
+--5.Delete
+DELETE FROM vendors  
+WHERE vendor_id IN('VE001', 'VE002', 'VE003')
+
+--6.Upate
+START TRANSACTION;
+
+SELECT * 
+FROM products;
+
+UPDATE products p
+SET p.product_price = (500000) + p.product_price;
+
+SELECT * 
+FROM products;
+
+ROLLBACK;
+
+SELECT * 
+FROM products;
+
+
+

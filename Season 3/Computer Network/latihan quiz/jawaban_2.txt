@@ -1,0 +1,59 @@
+192.168.36.0/24
+Staff room 		– 68 computers + 1 host
+Designer room 		– 33 computers + 1 host
+IT room 		– 27 computers + 1 host
+Operational room 	– 12 computers + 1 host
+
+Staff room
+2^n - 2 >= 69
+2^7 - 2 >= 69
+128 - 2 >= 69
+126 >= 69
+n = 7
+subnet mask     = 32-7
+		= /25
+		= 255.255.255.128			
+Network Address   = 192.168.36.0
+Default gateway   = 192.168.36.1
+Usable IP	  = 192.168.36.2 - 192.168.36.126
+Broadcast Address = 192.168.36.127
+
+Designer room 		– 33 computers + 1 host
+2^n - 2 >= 34
+2^6 - 2 >= 34
+64 - 2 >= 34
+n = 6
+Subnet mask = 32-6
+	    = /26
+            = 255.255.255.192
+Network Address = 192.168.36.128
+Default Gateway = 192.168.36.129
+Usable IP	= 192.168.36.130 - 192.168.36.190
+Broadcast Address = 192.168.36.191
+
+IT room 		– 27 computers + 1 host
+2^n - 2 >= 28
+2^5 - 2 >= 28
+32 - 2 > = 28
+n = 5
+Subnet mask = 32-5
+	    = /27
+	    = 255.255.255.224
+Network Address = 192.168.36.192
+Default Gateway = 192.168.36.193
+Usable IP 	= 192.168.36.194 - 192.168.36.222
+Broadcast Address = 192.168.36.223
+
+Operational room 	– 12 computers + 1 host
+2^n - 2 >= 13
+2^4 - 2 >= 13
+16 - 2 >= 13
+n = 4
+Subnet mask = 32-4
+	    = /28
+	    = 255.255.255.240
+Network Address	= 192.168.36.224
+Default GAteway = 192.168.36.225
+Usable IP	= 192.168.36.226 - 192.168.36.238
+Broadcast Address = 192.168.36.239
+

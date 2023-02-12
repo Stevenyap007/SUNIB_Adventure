@@ -1,0 +1,104 @@
+-- 1
+USE VA_stickers
+
+-- 2
+SELECT
+th.transactionid,
+c.customername,
+th.transactiondate
+FROM mscustomer c JOIN transactionheader th ON
+c.customerid = th.customerid
+WHERE YEAR(th.transactiondate) = 2022;
+
+-- 3
+SELECT
+mc.creatorname,
+ms.stickername,
+CONCAT('$ ', ms.stickerprice) AS `StickerPrice`
+FROM mssticker ms JOIN mscreator mc ON
+ms.creatorid = mc.creatorid
+WHERE mc.creatorname LIKE 'M%'
+UNION
+SELECT
+mc.creatorname,
+ms.stickername,
+CONCAT('$ ', ms.stickerprice) AS `StickerPrice`
+FROM mssticker ms JOIN mscreator mc ON
+ms.creatorid = mc.creatorid
+WHERE mc.creatorname LIKE 'J%';
+
+-- 4
+SELECT
+REPLACE(th.transactionid, 'TR', 'Transaction-') AS `TransactionID`,
+ms.stickername,
+UPPER(mc.customername) AS `CustomerName`,
+td.quantity
+FROM mscustomer mc JOIN transactionheader th ON
+mc.customerid = th.customerid JOIN transactiondetail td ON
+th.transactionid = td.transactionid JOIN mssticker ms ON
+td.stickerid = ms.stickerid
+WHERE ms.stickername LIKE '%PopUp%' AND lOCATE(' ',mc.customername)
+UNION
+SELECT
+REPLACE(th.transactionid, 'TR', 'Transaction-') AS `TransactionID`,
+ms.stickername,
+UPPER(mc.customername) AS `CustomerName`,
+td.quantity
+FROM mscustomer mc JOIN transactionheader th ON
+mc.customerid = th.customerid JOIN transactiondetail td ON
+th.transactionid = td.transactionid JOIN mssticker ms ON
+td.stickerid = ms.stickerid
+WHERE ms.stickername LIKE '%Mini%' AND lOCATE(' ',mc.customername);
+
+-- 5
+ALTER TABLE mssticker
+ADD COLUMN StickerCategory CHAR(10) CHECK(StickerCategory IN ('Fanmade','Official'))
+
+-- 6
+DELETE mc
+FROM mscustomer mc JOIN transactionheader th ON
+mc.customerid = th.customerid
+WHERE YEAR(th.transactiondate) = 2022 AND mc.customername LIKE 'H%';
+
+-- 7
+SELECT
+DATE_FORMAT(th.transactiondate, '%a, %D %b %Y') AS `Transaction Date`,
+mc.creatorname,
+ms.stickername,
+td.quantity AS `QuantityBought`,
+ms.stickerprice,
+td.quantity*ms.stickerprice AS `TotalPrice`
+FROM transactionheader th JOIN transactiondetail td ON
+th.transactionid = td.transactionid JOIN mssticker ms ON
+ms.stickerid = td.stickerid JOIN mscreator mc ON
+mc.creatorid = ms.creatorid
+WHERE mc.creatorid IN ('CR003','CR004') AND (td.quantity*ms.stickerprice) > 35000;
+
+-- 8
+SELECT
+RIGHT(td.transactionid,3) AS `TransactionNumber`,
+ms.stickerid AS `StickerID`,
+ms.stickername as `StickerName`,
+td.quantity AS `QuantityBought`
+FROM transactiondetail td JOIN mssticker ms ON
+td.stickerid = ms.stickerid
+ORDER BY RIGHT(td.transactionid,3) DESC
+
+-- 9
+CREATE VIEW viewFirstWordFromStickerName AS
+SELECT ms.stickerid `StickerID`,
+mc.creatorname `CreatorName`,
+SUBSTRING(ms.stickername, 1 ,LOCATE(" ", ms.stickername) - 1) `StickerName`
+FROM mssticker ms
+JOIN mscreator mc ON mc.creatorid = ms.creatorid
+
+-- 10
+CREATE VIEW viewStickerDescriptionPerTransaction AS
+SELECT
+REPLACE(th.transactionid,'TR','Transaction-') AS `TransactionID`,
+UPPER(CONCAT_WS('-',mc.creatorname,ms.stickername)) AS `StickerDescription`,
+td.quantity AS `QuantityBought`
+FROM transactionheader th JOIN transactiondetail td ON th.transactionid = td.transactionid JOIN mssticker ms ON
+td.stickerid = ms.stickerid JOIN mscreator mc ON
+ms.creatorid = mc.creatorid
+

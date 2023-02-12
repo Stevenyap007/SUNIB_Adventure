@@ -1,0 +1,95 @@
+-- 1
+USE gramediah
+
+-- 2
+SELECT
+c.CustomerName,
+th.TransactionDate
+FROM mscustomer c JOIN transactionheader th ON 
+c.CustomerID = th.CustomerID
+WHERE MONTH(th.TransactionDate) = 5;
+
+-- 3
+SELECT
+c.CustomerID AS ID,
+UPPER(c.CustomerName) as Name,
+c.CustomerDOB as DOB
+FROM mscustomer c 
+WHERE YEAR(c.CustomerDOB) < 2000
+UNION
+SELECT
+s.StaffID AS ID,
+UPPER(s.StaffName) as Name,
+s.StaffDOB as DOB
+FROM msstaff s;
+
+-- 4
+SELECT
+REPLACE(td.TransactionID, 'TR', 'Transaction') AS `TransactionID`,
+mb.BookTitle
+FROM transactiondetail td JOIN msbook mb ON
+td.BookID = mb.BookID
+WHERE mb.BookTitle like '%Learn%'
+UNION
+SELECT
+REPLACE(td.TransactionID, 'TR', 'Transaction') AS `TransactionID`,
+mb.BookTitle
+FROM transactiondetail td JOIN msbook mb ON
+td.BookID = mb.BookID JOIN transactionheader th ON
+th.TransactionID = td.TransactionID
+WHERE MONTH(th.TransactionDate) % 2 != 0;
+
+-- 5
+ALTER TABLE msbook 
+DROP COLUMN msbook.BookPublisherName;
+
+-- 6
+DELETE b
+FROM msbook b JOIN transactiondetail td ON 
+b.BookID = td.BookID JOIN transactionheader th ON
+th.TransactionID = td.TransactionID
+WHERE 
+DAYNAME(th.TransactionDate) = 'Wednesday' AND LENGTH(b.BookTitle) < 10;
+
+-- 7
+SELECT
+s.StaffName,
+c.CustomerName,
+ADDDATE(th.TransactionDate, 5)
+FROM mscustomer c JOIN transactionheader th ON
+c.CustomerID = th.CustomerID JOIN msstaff s ON
+s.StaffID = th.StaffID
+WHERE s.StaffGender LIKE 'Male' AND DAY(c.CustomerDOB) > 20;
+
+-- 8
+SELECT 
+td.TransactionID,
+b.BookID,
+UPPER(b.BookTitle) AS `BookTitle` 
+FROM transactiondetail td
+JOIN msbook b
+ON td.BookID = b.BookID
+ORDER BY b.BookTitle ASC;
+
+-- 9
+CREATE VIEW `BookTransaction` AS
+SELECT td.TransactionID,
+LOWER(b.BookTitle) AS `BookTitle`,
+b.BookAuthorName,
+CONCAT('Rp. ', b.BookPrice) AS `BookPrice` 
+FROM transactiondetail  td JOIN msbook b ON 
+b.BookID = td.BookID
+WHERE td.Quantity > 1;
+
+-- 10
+CREATE VIEW LongTitleAtFirstSemester AS
+
+SELECT
+td.TransactionID,
+b.BookTitle,
+DATE_FORMAT(th.TransactionDate, '%M %Y') AS `TransactionDate`
+FROM transactiondetail td JOIN msbook b ON
+td.BookID = b.BookID JOIN transactionheader th ON
+th.TransactionID = td.TransactionID
+WHERE MONTH(th.TransactionDate) < 7 AND LENGTH(b.BookTitle) > 10;
+

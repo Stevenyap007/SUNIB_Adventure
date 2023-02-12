@@ -1,0 +1,51 @@
+Switch (unicast) 	= dapat mengindetifikasi device mana (letak lokasi pc atau port mana) yang terkoneksi
+Switch unmanaged(bisa langsung) dan managed
+hub (broadcast)		= tidak (jumlah port lebih sedikit dari switch), hub akan mengirimkan data ke semua port
+			= traffic lebih padat, proses tidak efisien
+
+CABLE
+tujuan di twist juga untuk mengurangi interferensi
+UTP(Unshielded Twisted Pair) 	= 
+STP(Shielded Twisted Pair) 	= Tujuan mengurangi interferensi elektromagnetik dari luar, lebih mahal
+cable harus di crimping dengan RJ(pala kabel lan)
+ujungnya disebut RJ(Register jack)
+
+Perbedaan kabel straight dan crossover
+Straight 	= untuk device yang berbeda(switch -> router, Switch -> PC)
+crossover 	= untuk device yang sama (contoh switch -> switch, router -> router) tapi Router ke PC tetap menggunakan crossover
+
+Fiber Optic = kabel yang lebih kencang(speed) dan dapat jarak jauh (UTP pendek)
+
+MODEL
+Simplex (komunikasi satu arah)
+Duplex (komunikasi dua arah)
+Half Duplex (komunikasi 2 arah yang terjadi bergantian (walkie talkie)
+Full Duplex (discord, pembicaraan yang bebas tidak bergantian dapat dilakukan bersamaan)
+
+OSI Model
+
+1. Application
+2. Presentation 
+(mengenskripsi data ke suatu format)
+3. Session 
+(mengenstablish connection dengan destination), contoh tab dalam google chrome (membedakan 1 data pada koneksi 1 dengan yang lainnya)
+4. Transport 
+(Menghandle pengiriman data ke tujuan (membagi data ke berapa segmen), seperti data 1gb akan dibagi menajadi 100 mb/s, membuat segmen header(membuat bagian bagian secara urut dari 1 sampe sekian)
+5. Network
+berhubungan dengan IP (internet Protocl) address / Logical address (format : 4 desimal dipisahkan oleh titik), berisi source dan destination (tercantum di packet header)
+6. Data link
+Frame header (MAC (Media access Control) / Hardware Address / Burnt in Address / Physical Address) (format : Hexadecimal dengan dihubungkan tanda -) alamat ini juga terburnt in di NIC (terdapat secara bentuk fisik)
+7. Physical
+konversi bits (0 1)
+
+IP address bekerja di router
+MAC address bekerja di switch 
+
+pelajari Bit dan Byte
+konversi byte ke decimal 
+
+download cisco packet tracer 8.1.1
+
+Network interface Card (NIC)
+
+

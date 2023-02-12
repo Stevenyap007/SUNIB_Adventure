@@ -1,0 +1,9 @@
+volt meter dan capacitor TIDAK searah jarum jam
+diode bisa naik atau turn tergantung soal
+Capacitor filter = 0.1
+Resistor filter = 0.1
+resistor source = 0.01
+resistor load = 100
+Voltage source = peak dikali akar 2 (339.6)
+frekuensi = 10
+Voltmeter dan diode diaksi 1000 biar arus tidak dimakan

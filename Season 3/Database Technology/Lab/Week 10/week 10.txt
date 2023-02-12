@@ -1,0 +1,19 @@
+--CREATE VIEW
+CREATE VIEW customerOnDecember24 AS
+SELECT c.customer_id
+FROM customers as c JOIN transaction_headers th ON c.customer_id = th.customer_id
+WHERE th.transaction_date = '2021-12-24';
+
+SELECT * FROM `customerondecember24`;
+
+CREATE OR REPLACE VIEW customerOnDecember24 AS
+SELECT c.customer_id,c.customer_name
+FROM customers as c JOIN transaction_headers th ON c.customer_id = th.customer_id
+WHERE th.transaction_date = '2021-12-24';
+
+DROP VIEW customerondecember24;
+
+--INDEX
+CREATE INDEX baristas_baristaname ON baristas(barista_name);
+
+ALTER TABLE baristas DROP INDEX baristas_baristaname;
