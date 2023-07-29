@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;MountainBike.seatHeight&apos; in &apos;MountainBike&apos;&#x0D;&#x0A;- Original project: &apos;Meeting6&apos;&#x0D;&#x0A;- Original element: &apos;MountainBike.seatHeight&apos;&#x0D;&#x0A;- Getter method name: &apos;getSeatHeight&apos;&#x0D;&#x0A;- Setter method name: &apos;setSeatHeight&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;seatHeight&apos;" flags="589830" getter="getSeatHeight" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;{MountainBike.java[MountainBike^seatHeight" insertion="1" setter="setSeatHeight" stamp="1679995328914" version="1.0" visibility="1"/>
+</session>

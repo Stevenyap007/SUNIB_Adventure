@@ -1,0 +1,6 @@
+if (tersedia) {
+         tersedia = false;
+         System.out.println("Buku '" + judul + "' telah dipinjam.");
+      } else {
+         System.out.println("Buku '" + judul + "' sedang tidak tersedia.");
+      }

@@ -1,0 +1,17 @@
+Soal = https://tinyurl.com/oopcasereview
+Class
+- Main
+- Ekonomi:
+1. String Destinasi
+2. String Asal
+3. int Harga
+getTotalFee()
+- Eksekutif extends Ekonomi implement PremiumLounge
+sama
+4. String pin
+getTotalFee()
+gneratePin()
+
+Interface
+- PremiumLounge
++ generatePin()

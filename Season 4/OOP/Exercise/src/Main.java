@@ -1,0 +1,123 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Main {
+	
+	Vector<BasicBouquet> cart = new Vector<>();
+	Scanner scan = new Scanner(System.in);
+	int totalBill = 0;
+	
+	public void menu1() {
+		String bouquetType = "";
+		String message = "";
+		
+		if(cart.size() == 0) {
+			System.out.println("Cart is empty, please select flower first!");
+		}else {
+			System.out.printf("%2s %-15s %-15s %s\n", "No",  "Flower Type", "Bouquet Type", "Message");
+			for (int i = 0; i < cart.size(); i++) {
+				if(cart.get(i).getClass() == BasicBouquet.class) {
+					bouquetType = "Basic";
+					message = "(blank)";
+				}else if(cart.get(i).getClass() == PremiumBouquet.class) {
+					bouquetType = "Premium";
+					message = ((PremiumBouquet)cart.get(i)).getMessage();
+				}
+				
+				System.out.printf("%2d %-15s %-15s %s\n", i+1 ,  cart.get(i).getFlower(), bouquetType, message);
+			}
+			
+			System.out.println("Press enter to continue");
+			scan.nextLine();
+		}
+		
+	}
+	
+
+	
+	public void menu2() {
+		String bouquetType;
+		String flowerType;
+		String message;
+		int price = 0;
+		
+		do {
+			System.out.print("Input bouquet type [Basic/Premium]: ");
+			bouquetType = scan.nextLine();
+		}while (!bouquetType.equals("Basic") && !bouquetType.equals("Premium"));
+		
+		do {
+			System.out.print("Input Flower type [Rose/Gerbera Daisy/tulip]: ");
+			flowerType = scan.nextLine();
+		}while (!flowerType.equals("Rose") && !flowerType.equals("Gerbera Daisy") && !flowerType.equals("Tulip"));
+		
+		if(flowerType.equals("Rose")) {
+			price += 150000;
+		}else if(flowerType.equals("Gerbera Daisy")) {
+			price += 200000;
+		}else if(flowerType.equals("Tulip")){
+			price += 250000;
+		}
+		
+		if(bouquetType.equals("Basic")) {
+			cart.add(new BasicBouquet(flowerType, price));
+		}else if(bouquetType.equals("Premium")) {
+			do {
+				System.out.print("Input your message [10..100]: ");
+				message = scan.nextLine();
+			}while (message.length() < 10 && message.length() > 100);
+			price += (message.replace(" ", "").length()* 500);
+			cart.add(new PremiumBouquet(flowerType, price, message));
+		}
+		
+		totalBill += price;
+		System.out.printf("%s added to cart - Rp. %d\n",flowerType,price);
+		scan.nextLine();	
+	}
+	
+	public void menu3() {
+		int payment = 0;
+		System.out.printf("Your purchase: Rp. %d\n",totalBill);
+		
+		do {
+			System.out.print("Input your payment: ");
+			payment = scan.nextInt();
+			scan.nextLine();
+		}while(payment < totalBill || payment % 10000 != 0);
+		System.out.printf("Thank you for your payment. Your charge: Rp. %d",payment-totalBill);
+		
+		
+	}
+	
+	public void Menu() {
+		int choice =  0;
+		do {
+			System.out.println("Bee Flower Shop");
+			System.out.println("================");
+			System.out.println("1. View cart");
+			System.out.println("2. Add flower to cart");
+			System.out.println("3. Checkout and Exit");
+			System.out.print("Input your choice: ");
+			choice = scan.nextInt();
+			scan.nextLine();
+			
+			if(choice == 1) {
+				menu1();
+			}else if(choice == 2) {
+				menu2();
+			}else if(choice == 3) {
+				menu3();
+			}
+			
+		}while (choice != 3);
+		
+	}
+	
+	public Main() {
+		Menu();
+	}
+	
+	public static void main(String[] args) {
+		new Main();
+	}
+}

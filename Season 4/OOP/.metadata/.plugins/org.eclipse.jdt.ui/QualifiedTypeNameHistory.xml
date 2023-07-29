@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="latihan.BasicBouquet"/>
+    <fullyQualifiedTypeName name="latihan.PremiumBouquet"/>
+    <fullyQualifiedTypeName name="Main"/>
+    <fullyQualifiedTypeName name="BasicBouquet"/>
+    <fullyQualifiedTypeName name="PremiumBouquet"/>
+    <fullyQualifiedTypeName name="java.util.function.Predicate"/>
+    <fullyQualifiedTypeName name="PremiumLounge"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="Ekonomi"/>
+    <fullyQualifiedTypeName name="Eksekutif"/>
+</qualifiedTypeNameHistroy>

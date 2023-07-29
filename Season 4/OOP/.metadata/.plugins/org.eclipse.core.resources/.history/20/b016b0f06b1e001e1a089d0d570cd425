@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Main {
+	Scanner scan;
+	
+	public void menu1() {
+		String tipe;
+		String asal;
+		String tujuan;
+		double harga;
+		
+		do {
+			System.out.println("Masukkan type penerbangan [ekonomi|eksekutif]: ");
+			tipe = scan.nextLine();
+		} while (!tipe.equals("ekonomi") && !tipe.equals("eksekutif"));
+		
+		do {
+			System.out.println("Masukkan kode bandara asal [3 huruf, capital]: ");
+			asal = scan.nextLine();
+		} while (asal.length() != 3 || !asal.equals(asal.toUpperCase()));
+		
+		do {
+			System.out.println("Masukkan kode bandara tujuan [3 huruf, capital]: ");
+			tujuan = scan.nextLine();
+		} while (tujuan.length() != 3 || !tujuan.equals(tujuan.toUpperCase()) || asal.equals(tujuan));
+		
+		do {
+			System.out.println("Masukkan harga dasar [kelipatan 10rb]: ");
+			harga = scan.nextDouble();
+			scan.nextLine();
+		} while (harga % 10000 != 0);
+		
+	}
+	
+	public void menu() {
+		int input;
+		
+		do {
+			System.out.println("1. Tambah penerbngan");
+			System.out.println("2. Lihat penerbngan");
+			System.out.println("3. Keluar");
+			System.out.println("Input: ");
+			input = scan.nextInt();
+			scan.nextLine();
+			if(input == 1) {
+				menu1();
+			}else if(input == 2) {
+				
+			}else if(input == 3) {
+				
+			}
+		}while(input !=3);
+	}
+	
+	
+	
+	public Main() {
+		scan = new Scanner(System.in);
+		menu();
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Main();
+	}
+
+}

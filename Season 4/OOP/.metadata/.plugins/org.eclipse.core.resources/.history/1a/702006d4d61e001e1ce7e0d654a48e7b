@@ -1,0 +1,86 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Main {
+	Scanner scan;
+	Vector<Ekonomi> penerbangan;
+
+	public void menu1() {
+		String tipe;
+		String asal;
+		String tujuan;
+		Double harga;
+		
+		do {
+			System.out.println("Masukkan type penerbangan [ekonomi|eksekutif]: ");
+			tipe = scan.nextLine();
+		} while (!tipe.equals("ekonomi") && !tipe.equals("Eksekutif"));
+		
+		do {
+			System.out.println("Masukkan kode bandara asal [3 huruf, capital]: ");
+			asal = scan.nextLine();
+		} while (asal.length() != 3 || !asal.equals(asal.toUpperCase()));
+		
+		do {
+			System.out.println("Masukkan kode bandara tujuan [3 huruf, capital]: ");
+			tujuan = scan.nextLine();
+		} while (tujuan.equals(asal) || tujuan.length() != 3 || !tujuan.equals(tujuan.toUpperCase()));
+		
+		do {
+			System.out.println("Masukkan harga dasar [kelipatan 10rb]: ");
+			harga = scan.nextDouble();
+			scan.nextLine();
+		}while(harga % 10000 != 0);
+		
+		if(tipe.equals("ekonomi")) {
+			penerbangan.add(new Ekonomi(tujuan, asal, 0));
+		}else if (tipe.equals("eksekutif")) {
+			penerbangan.add(new Eksekutif(tujuan, asal, 0));
+		}
+		
+		System.out.println("Penerbangan berhasil didaftarkan.");
+		scan.nextLine();
+		
+		
+	}
+	
+	public void menu2() {
+//		Penerbangan | Total Harga | Tipe          | PIN Lounge  
+		System.out.printf("%s | %s | %s | %s\n","Penerbangan", "Total Harga", "Tipe", "Pin Lounge");
+	}
+	
+	public void menu() {
+		int input;
+		
+		do {
+			System.out.println("1. Tambah Penerbangan ");
+			System.out.println("2. Lihat Penerbangan ");
+			System.out.println("3. Exit");
+			input = scan.nextInt();
+			scan.nextLine();
+			
+			if(input == 1) {
+				menu1();
+			}else if(input == 2) {
+				menu2();
+			}else if(input == 3) {
+				
+			}
+			
+		} while (input != 3);
+		
+		
+	}
+	
+	public Main() {
+		scan = new Scanner(System.in);
+		penerbangan = new Vector<Ekonomi>();
+		menu();
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Main();
+	}
+
+}
