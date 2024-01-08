@@ -1,0 +1,52 @@
+games = read.csv("Games.csv", na.strings = c("","N/A"), fileEncoding = "UTF-8-BOM")
+header = read.csv("Header.csv", na.strings = c("","N/A"), fileEncoding = "UTF-8-BOM")
+detail = read.csv("Detail.csv", na.strings = c("","N/A"), fileEncoding = "UTF-8-BOM")
+
+transactions = merge(header, detail, by = "TransactionId")
+transactions = merge(transactions, games, by = "GameId")
+
+
+# Preprocess & Clean Data
+transactions = transactions[complete.cases(transactions),]
+transactions = transactions[,c("TransactionId", "Name", "Quantity")]
+
+splitted_data = split(x = transactions$Name, f = transactions$TransactionId)
+splitted_data = as(splitted_data, "transactions")
+splitted_data
+
+library(arules)
+
+rules = apriori(splitted_data,parameter = list(target = "frequent itemsets", support= 0.005))
+inspect(rules)
+
+assoc_rule = ruleInduction(rules, confidence = 0.15)
+inspect(assoc_rule)
+
+#FP Growth
+data = data.frame(TransactionID = transactions$TransactionId, Name = transactions$Name)
+data
+
+total_items = length(unique(transactions$Name))
+total_transactions = length(unique(transactions$TransactionId))
+total_transactions
+
+unique_ids = unique(transactions$TransactionId)
+unique_ids
+
+excel =""
+for (id in unique(transactions$TransactionId)){
+  games_vector = data[data$TransactionID == id, c("Name")]
+  excel = paste(excel, paste(games_vector, collapse = ","), sep="")
+  excel = paste(excel, "\n",sep ="")
+}
+
+excel
+write(excel, file= "Data.csv", sep="")
+system("cmd", input = "fpgrowth -s0.15 -k, Data.csv Result.csv")
+
+
+
+
+
+
+
