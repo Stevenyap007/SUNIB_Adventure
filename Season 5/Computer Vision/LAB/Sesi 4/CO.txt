@@ -1,0 +1,23 @@
+Blur
+ - manual median
+ - blur
+ - median
+ - Gaussian
+ - bilateral
+
+
+Edge Detection
+ - laplace 
+   - 8u
+   - 16s
+   - 32f
+   - 64f
+ - canny
+   - 50100
+   - 50150
+   - 75150
+   - 75225
+ - sobel
+   - x
+   - y
+   - merged

@@ -1,0 +1,14 @@
+https://tinyurl.com/link-com-vis
+
+[] Basic Python Review
+[] Numpy Review
+	- array
+	- ndim, shape, size, reshape
+	- zeros, ones, empty
+	- flip, flatten, ravel
+	- vstack, hstack
+	- random (rand, randint)
+[] Introduction to OpenCV
+	- imread
+	- imshow
+	- imwrite

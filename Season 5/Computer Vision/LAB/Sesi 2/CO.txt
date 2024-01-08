@@ -1,0 +1,26 @@
+Image manipulation
+- image BGR n RGB
+- resizing - cv2.resize()
+- image.shape
+- image.flat
+
+
+
+Matplotlib
+- plt.imshow() + cmap
+- plt.show()
+- plt.figure(figsize=(x, y))
+- plt.plot()
+- plt.subplot()
+- plt.legend()
+- plt.xticks()
+- plt.yticks()
+- plt.xlabel()
+- plt.ylabel()
+
+
+Histogram
+- manual counter
+- hist
+- equalizeHist
+- CLAHE
